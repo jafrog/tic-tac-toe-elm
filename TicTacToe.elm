@@ -1,29 +1,11 @@
 module TicTacToe where
 
-import Html exposing (div, button, text)
-import Html.Events exposing (onClick)
-import StartApp.Simple as StartApp
+import Array exposing(Array, set)
 
+type Mark = X | O | Empty
+type alias Game = Array Mark
 
-main =
-  StartApp.start { model = model, view = view, update = update }
+game = Array.fromList (List.repeat 9 Empty)
 
-
-model = 0
-
-
-view address model =
-  div []
-    [ button [ onClick address Decrement ] [ text "-" ]
-    , div [] [ text (toString model) ]
-    , button [ onClick address Increment ] [ text "+" ]
-    ]
-
-
-type Action = Increment | Decrement
-
-
-update action model =
-  case action of
-    Increment -> model + 1
-    Decrement -> model - 1
+setX game pos =
+  Array.set pos X game
